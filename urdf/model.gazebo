@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot>
+
+<!--gazebo plugins file -->
+
+<gazebo>
+    <plugin
+      filename="gz-sim-diff-drive-system"
+      name="gz::sim::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.25</wheel_separation>
+      <wheel_radius>0.035</wheel_radius>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <frame_id>odom</frame_id> 
+      <child_frame_id>base_footprint</child_frame_id> 
+      <odom_publisher_frequency>30</odom_publisher_frequency> 
+      <tf_topic>/tf</tf_topic>
+    </plugin>
+</gazebo>
+
+<gazebo>
+<plugin filename="gz-sim-joint-state-publisher-system"
+  name="gz::sim::systems::JointStatePublisher">
+  <topic>joint_states</topic>
+  <joint_name>left_wheel_joint</joint_name>
+  <joint_name>right_wheel_joint</joint_name>
+</plugin>
+</gazebo>
+
+<gazebo reference="camera_link">
+<sensor name="mycamera" type="depth_camera">
+       <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+          <topic>depth_camera/image_raw</topic>
+          <gz_frame_id>camera_optical_frame</gz_frame_id>
+          <camera name="mycamera1">
+           <camera_info_topic>depth_camera/camera_info</camera_info_topic>
+            <horizontal_fov>1.02974</horizontal_fov>
+          <image>
+            <width>1920</width>
+            <height>1080</height>
+            <format>R_FLOAT32</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+            <optical_frame_id>camera_optical_frame</optical_frame_id>
+          </camera>
+        </sensor>
+</gazebo>
+
+</robot>
