@@ -73,10 +73,18 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}]
     )
 
+    start_gazebo_ros_image_bridge_cmd = Node(
+    package='ros_gz_image',
+    executable='image_bridge',
+    arguments=['depth_camera/image_raw'],
+    output='screen',
+    )
+
     return LaunchDescription([
         start_gazebo_ros_bridge_cmd,
         gazebo,
         spawn_entity,
         joint_state_publisher_node,
-        node_robot_state_publisher
+        node_robot_state_publisher,
+        start_gazebo_ros_image_bridge_cmd
     ])
