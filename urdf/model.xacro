@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="tortoisebot">
+<xacro:include filename="$(find depth_to_pcl)/urdf/model.gazebo"/>
+
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size="0.6 0.3 0.3"/>
+			</geometry>
+			<material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.6 0.3 0.3"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="1.0"/>
+			<inertia ixx="0.015" iyy="0.0375" izz="0.0375" ixy="0" ixz="0" iyz="0"/>
+		</inertial>
+	</link>
+
+	<link name = "base_footprint"/>
+
+	<joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.185" rpy="0 0 0"/>
+</joint>
+	 
+	<link name="front_caster">
+		<visual>
+			<geometry>
+				<box size="0.1 0.1 0.15"/>
+			</geometry>
+			<material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.1 0.1 0.15"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.05"/>
+			<inertia ixx="0.00013542" iyy="0.00013542" izz="0.00008333" ixy="0" ixz="0" iyz="0"/>
+		</inertial>
+	</link>
+	<joint name="front_caster_joint" type="continuous">
+		<axis xyz="0 0 1"/>
+		<parent link="base_link"/>
+		<child link="front_caster"/>
+		<origin rpy="0 0 0" xyz="0.3 0 -0.075"/>
+	</joint>
+	<link name="front_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.1"/>
+			<inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5" ixy="0" ixz="0" iyz="0"/>
+		</inertial>
+	</link>
+	<joint name="front_wheel_joint" type="continuous">
+		<axis xyz="0 0 1"/>
+		<parent link="front_caster"/>
+		<child link="front_wheel"/>
+		<origin rpy="-1.5708 0 0" xyz="0.05 0 -.075"/>
+	</joint>
+	<link name="right_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.1"/>
+			<inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5" ixy="0" ixz="0" iyz="0"/>
+		</inertial>
+	</link>
+	<joint name="right_wheel_joint" type="continuous">
+		<axis xyz="0 0 1">
+		<limit>
+		<effort>20</effort> 
+		</limit>
+		</axis>
+		<max_linear_acceleration>0.033</max_linear_acceleration>
+		<parent link="base_link"/>
+		<child link="right_wheel"/>
+		<origin rpy="-1.5708 0 0" xyz="-0.2825 -0.125 -.15"/>
+	</joint>
+	<link name="left_wheel">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.035"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.1"/>
+			<inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5" ixy="0" ixz="0" iyz="0"/>
+		</inertial>
+	</link>
+
+	<joint name="left_wheel_joint" type="continuous">
+		<axis xyz="0 0 1">
+		<limit>
+		<effort>20</effort>
+		</limit>
+		</axis>
+		<max_linear_acceleration>0.033</max_linear_acceleration>
+		<parent link="base_link"/>
+		<child link="left_wheel"/>
+		<origin rpy="-1.5708 0 0" xyz="-0.2825 0.125 -.15"/>
+	</joint>
+
+<link name="camera_link">
+  <visual>
+    <geometry>
+      <box size="0.02 0.06 0.03"/>
+    </geometry>
+    <material name="blue">
+      <color rgba="0 0 1 1"/>
+    </material>
+  </visual>
+  <collision>
+    <geometry>
+      <box size="0.02 0.06 0.03"/>
+    </geometry>
+  </collision>
+  <inertial>
+    <mass value="0.05"/>
+    <inertia ixx="1e-5" iyy="1e-5" izz="1e-5" ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+</link>
+
+<joint name="camera_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="camera_link"/>
+  <origin xyz="0.31 0.0 0.06" rpy="0 0 0"/>
+</joint>
+
+<link name="camera_optical_frame"/>
+<joint name="camera_optical_frame_joint" type="fixed">
+  <parent link="camera_link"/>
+  <child link="camera_optical_frame"/>
+  <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+</joint>
+
+</robot>
