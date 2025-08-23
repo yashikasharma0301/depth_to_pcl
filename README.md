@@ -1,5 +1,5 @@
 # ROS2 Depth to Point Cloud Converter
-This project demonstrates depth image to point cloud conversion in a differential drive robot simulation using ros_gz_bridge. The package processes depth camera data and converts it to point cloud format using ros_gz_bridge for real-time 3D visualization and perception applications. View the project visualization [here]().
+This project demonstrates depth image to point cloud conversion in a differential drive robot simulation using ros_gz_bridge. The package processes depth camera data and converts it to point cloud format using ros_gz_bridge for real-time 3D visualization and perception applications. View the project visualization [here](https://youtu.be/LkLpLuTt9FE).
 
 ## System Requirements
 - **Ubuntu**: 22.04 LTS
