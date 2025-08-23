@@ -45,8 +45,8 @@
             <format>R_FLOAT32</format>
           </image>
           <clip>
-            <near>0.02</near>
-            <far>300</far>
+            <near>0.05</near>
+            <far>200</far>
           </clip>
             <optical_frame_id>camera_optical_frame</optical_frame_id>
           </camera>
