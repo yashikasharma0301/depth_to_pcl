@@ -70,7 +70,7 @@ If you want to see the depth image instead of the point cloud:
 - Turn off the point cloud display in RViz2
 - Set the **Fixed Frame** to `base_footprint`
 - Select the corresponding RViz plugins for camera and image visualization
-- You will be able to see some rough visualization in the set format (refer rqt for better visualization)
+- You will be able to see some rough visualization in the set format (Use rqt image viewer for better visualization)
 <img width="1228" height="1012" alt="image" src="https://github.com/user-attachments/assets/97a78c50-f71d-464f-96d9-496b8fd9cdcc" />
 
 <img width="1390" height="876" alt="image" src="https://github.com/user-attachments/assets/fe3f12d8-4c61-41d1-865f-3fe42fa9831e" />
